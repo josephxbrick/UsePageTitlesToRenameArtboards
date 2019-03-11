@@ -1,11 +1,9 @@
 @import 'common.js';
 @import 'symbolfunctions.js';
 /*
- This plug-in renames artboards on the current page to the override text of a symbol instance
- containing the page's title. (E.g., as you might have in a header.)
+This plugin is handy if your artboards contain a symbol instance to display the artboard's tile (E.g., when using Sketch to produce a PDF or printed document that has a title on each page.) This plug-in renames artboards on the current page to the  text of a symbol instance containing the page's title.
 
- The title needs to be in a symbol-instance override named '<pageTitle>'. It doesn't matter what
- the symbol instance itself is called.
+The title needs to be in a symbol-instance override named '<pageTitle>'. It doesn't matter what the symbol instance itself is called or how many other overrides there are. <pageTitle> cannot be part of a nested symbol, however.
 */
 var onRun = function(context) {
   let doc = context.document;
