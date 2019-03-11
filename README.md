@@ -1,5 +1,5 @@
 # UsePageTitlesToRenameArtboards
-This plugin is handy if your artboards contain a symbol instance to display the artboard's title (E.g., when using Sketch to produce a PDF or printed document that has a title on each page.) 
+This plugin is handy if your artboards contain a symbol instance to display the artboard's title. (E.g., when using Sketch to produce a PDF or printed document that has a title on each page.) 
 
 This plug-in renames artboards on the current Sketch page to the text of the symbol instance containing the page's title, as you might have in a header symbol.
 
