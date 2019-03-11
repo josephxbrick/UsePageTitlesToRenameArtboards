@@ -1,0 +1,19 @@
+{
+  "commands" : [
+    {
+      "script" : "main.js",
+      "name" : "Name artboards from page title",
+      "handlers" : "onRun",
+      "identifier" : "nameartboards"
+    }
+  ],
+  "menu" : {
+    "isRoot": true,
+    "items" : [
+      "nameartboards"
+    ],
+    "title" : "Name artboards from page title"
+  },
+  "description" : "Name artboards from symbol instance with page title.",
+  "name" : "Name artboards from page title"
+}
