@@ -8,3 +8,5 @@ The title needs to be in a symbol-instance override named '<pageTitle>'. It does
 Your symbol should be set up like this:
 
 <img src="/readme_images/sample.png" width="400">
+
+Check out the sample.sketch file in this repository, which contains a properly configured symbol.
