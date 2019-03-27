@@ -3,10 +3,12 @@ This plugin is handy if your artboards contain a symbol instance to display the 
 
 This plug-in renames artboards on the current Sketch page to the text of the symbol instance containing the page's title, as you might have in a header symbol.
 
-The title needs to be in a symbol-instance override named `<pageTitle>`. It doesn't matter what the symbol instance itself is called or how many other overrides there are in the symbol. `<pageTitle>` cannot be part of a nested symbol, however.
+The title needs to be in a symbol-instance override named either `<pageTitle>` or `<sectionTitle>`. It doesn't matter what the symbol instance itself is called or how many other overrides there are in the symbol. `<pageTitle>` cannot be part of a nested symbol, however.
   
 Your symbol should be set up like this:
 
 <img src="/readme_images/sample.png" width="400">
+
+(The section title would be set up the same way)
 
 Check out the sample.sketch file in this repository, which contains a properly configured symbol.
