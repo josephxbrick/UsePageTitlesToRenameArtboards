@@ -1,19 +1,24 @@
-{
-  "commands" : [
     {
-      "script" : "main.js",
-      "name" : "Name artboards from page title",
-      "handlers" : "onRun",
-      "identifier" : "nameartboards"
-    }
-  ],
-  "menu" : {
-    "isRoot": true,
-    "items" : [
-      "nameartboards"
+    "author": "Joseph Brick",
+    "commands": [{
+        "script": "main.js",
+        "name": "Name Artboards",
+        "identifier": "nameArtboards",
+        "handlers": {
+          "run": "_nameArtboards"
+        }
+      },
     ],
-    "title" : "Name artboards from page title"
-  },
-  "description" : "Name artboards from symbol instance with page title.",
-  "name" : "Name artboards from page title"
-}
+    "menu": {
+      "isRoot": true,
+      "items": [
+        "nameArtboards"
+      ]
+    },
+    "identifier": "josephxbrick-name-art-boards",
+    "homepage": "https://github.com/josephxbrick/UsePageTitlesToRenameArtboards",
+    "version": "1.0",
+    "description": "Uses the value of a symbol instance on each artboard to name the artboard.",
+    "authorEmail": "jbrick@gmail.com",
+    "name": "Name Artboards"
+  }

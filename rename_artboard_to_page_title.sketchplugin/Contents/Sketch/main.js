@@ -1,41 +1,39 @@
 @import 'common.js';
 @import 'symbolfunctions.js';
-/*
-This plugin is handy if your artboards contain a symbol instance to display the artboard's tile (E.g., when using Sketch to produce a PDF or printed document that has a title on each page.) This plug-in renames artboards on the current page to the  text of a symbol instance containing the page's title.
+const {toArray} = require('util');
+var Settings = require('sketch/settings');
 
-The title needs to be in a symbol-instance override named '<pageTitle>'. It doesn't matter what the symbol instance itself is called or how many other overrides there are. <pageTitle> cannot be part of a nested symbol, however.
-*/
-var onRun = function(context) {
-  let doc = context.document;
-  let thisPage = doc.currentPage();
-  updateArtboards(doc, thisPage);
+// called from plug-in menu
+var _nameArtboards = function(context) {
+  doc = context.document;
+  let summary = [];
+  if (checkNameArtboardSetup(doc, summary) !== undefined){
+    nameArtboards(context, summary);
+  }
+  displaySummary(doc, summary);
 }
 
-function updateArtboards(doc, page) {
-  const artboardTitleOverrideName = '<pageTitle>'
-  let artboards = [page artboards];
-  let artboardCount = artboards.count();
+//======================================================
+
+function nameArtboards(context, summary) {
+  const doc = context.document;
+  const page = doc.currentPage();
+  let artboards = toArray(page.layers()).filter(item => item.class() === MSArtboardGroup);
   let titlesAdded = 0;
-  for (let i = 0; i < artboardCount; i++) {
-    let artboard = artboards[i];
-    setTimeout(() => {
-      doc.showMessage(`Updating artboard ${i + 1}. ${((i + 1)/artboardCount * 100).toFixed(0)}% complete.`)
-    }, 0);
-    layers = artboard.children();
-    for (let j = 0; j < layers.count(); j++) {
-      let layer = layers[j];
-      if (layer.class() === MSSymbolInstance) {
-        if (setArtboardName(artboard, layer, artboardTitleOverrideName) !== undefined) {
-          titlesAdded++;
-        }
+  for (const artboard of artboards) {
+    instances = toArray(artboard.children()).filter(item => item.class() === MSSymbolInstance);
+    for (const instance of instances) {
+      if (setArtboardName(artboard, instance, '<sectionTitle>') !== undefined) {
+        titlesAdded++;
+      }
+      if (setArtboardName(artboard, instance, '<pageTitle>') !== undefined) {
+        titlesAdded++;
       }
     }
   }
-
+  // summary
   const br = String.fromCharCode(13);
-  setTimeout(() => {
-    alert('Update complete.', `${br}Titles updated: ${titlesAdded}`)
-  }, 50);
+  summary.push(`${titlesAdded} artboards named`);
 }
 
 function setArtboardName(artboard, instance, overrideName) {
@@ -45,4 +43,13 @@ function setArtboardName(artboard, instance, overrideName) {
     return overrideText;
   }
   return undefined;
+}
+
+function checkNameArtboardSetup(doc, summary) {
+  const pageTitle = symbolMasterWithOverrideName(doc, '<pageTitle>');
+  if (pageTitle === undefined) {
+    summary.push('[ERROR]Name artboards: No symbol with override <pageTitle> found.');
+    return undefined;
+  }
+  return 'success';
 }
